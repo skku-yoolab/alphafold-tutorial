@@ -353,6 +353,8 @@ unrelaxed_model_5_pred_0.cif
 unrelaxed_model_5_pred_0.pdb
 ```
 
+![PyMOL](image-3.png)
+
 <!-- 
 ```bash
 python3 "docker/run_docker.py" \
