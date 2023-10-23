@@ -293,17 +293,17 @@ python3 "docker/run_docker.py" \
 - AlphaFold는 자체적인 정확도 예측 점수를 출력함.
 
 ```plain text
-# Database query result
+% Database query result
 msas/
-# Self-confidence predictions
+% Self-confidence predictions
 confidence_model_1_pred_0.json
 confidence_model_2_pred_0.json
 confidence_model_3_pred_0.json
 confidence_model_4_pred_0.json
 confidence_model_5_pred_0.json
-# Input features
+% Input features
 features.pkl
-# Output structure sorted by predicted condidence scores
+% Output structure sorted by predicted condidence scores
 ranked_0.cif
 ranked_0.pdb
 ranked_1.cif
@@ -314,21 +314,21 @@ ranked_3.cif
 ranked_3.pdb
 ranked_4.cif
 ranked_4.pdb
-# Ranking details
+% Ranking details
 ranking_debug.json
-# Physically relaxed models
+% Physically relaxed models
 relaxed_model_2_pred_0.cif
 relaxed_model_2_pred_0.pdb
 relaxed_model_5_pred_0.cif
 relaxed_model_5_pred_0.pdb
 relax_metrics.json
-# Detailed outputs
+% Detailed outputs
 result_model_1_pred_0.pkl
 result_model_2_pred_0.pkl
 result_model_3_pred_0.pkl
 result_model_4_pred_0.pkl
 result_model_5_pred_0.pkl
-# Unrelaxed models
+% Unrelaxed models
 unrelaxed_model_1_pred_0.cif
 unrelaxed_model_1_pred_0.pdb
 unrelaxed_model_2_pred_0.cif
