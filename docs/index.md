@@ -21,7 +21,7 @@
 - [이곳](https://docs.docker.com/engine/install/)에 Linux 배포판 별로 설치 방법이 상세하게 작성되어 있음.
 - Google이 매우 잘 활용하고 있으므로 AlphaFold도 Docker 기반으로 배포되고 있음.
 
-### Docker Engine 설치하기
+### 설치하기
 
 - OS는 Linux만 가능함.
 - 배포판은 Ubuntu, REHL 같은 유명한 것은 가능함.
@@ -78,11 +78,11 @@ sudo usermod -aG docker $USER
 - Docker container 내부에서 GPU를 사용하기 위해서 필요한 toolkit임.
 - System에 반드시 CUDA driver가 설치되어 있어야 작동함.
 
-### CUDA driver 설치하기
+### CUDA driver
 
 [이곳](https://developer.nvidia.com/cuda-downloads)을 참조하여 driver를 설치하면 됨. (생략)
 
-### NVIDIA Container Toolkit 설치하기
+### 설치하기
 
 [이곳](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) 다른 배포판에 관하여 설명되어 있음.
 
@@ -188,7 +188,7 @@ docker build -f docker/Dockerfile -t alphafold .
 
 - (2023-10-22) Ada Lovelace (RTX 4000 series)를 사용하려면 `docker/Dockerfile`을 수정해야함.
 
-```diff
+```diff title="docker/Dockerfile"
 --- a/docker/Dockerfile
 +++ b/docker/Dockerfile
 @@ -12,7 +12,7 @@
@@ -264,7 +264,7 @@ pip3 install "requests==2.28.1"
 
 - 단백질의 서열은 FASTA format으로 입력받음.
 
-```plain text
+```plain
 >Protein-G
 YKLILNGKTLKGETTTEAVDAATAEKVFKQYANDNGVDGEWTYDDATKTFTVTE
 ```
@@ -286,13 +286,25 @@ python3 "docker/run_docker.py" \
   --output_dir="OUTPUT_DIR"
 ```
 
+- Multimer의 경우 다음과 같이 여러 서열이 들어간 FASTA를 작성하고 preset을 변경하면됨.
+
+```bash
+python3 "docker/run_docker.py" \
+  --fasta_paths="$FASTA_PATH" \
+  --max_template_date="2022-01-01" \
+  --model_preset="monomer" \
+  --db_preset=full_dbs \
+  --data_dir="$DOWNLOAD_DIR" \
+  --output_dir="OUTPUT_DIR"
+```
+
 ### 결과 분석
 
 - 예측된 model은 PDB 또는 mmCIF 형식으로 출력됨.
 - PyMOL, VMD, Chiemera 등으로 시각화 가능함.
 - AlphaFold는 자체적인 정확도 예측 점수를 출력함.
 
-```plain text
+```plain
 % Database query result
 msas/
 % Self-confidence predictions
