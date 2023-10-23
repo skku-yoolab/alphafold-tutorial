@@ -1,0 +1,943 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Minsoo Kim">
+      
+      
+        <link rel="canonical" href="https://skku-yoolab.github.io/alphafold-tutorial/">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
+    
+    
+      
+        <title>AlphaFold Beginner's Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.35e1ed30.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#alphafold" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="AlphaFold Beginner&#39;s Guide" class="md-header__button md-logo" aria-label="AlphaFold Beginner's Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AlphaFold Beginner's Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/skku-yoolab/alphafold-tutorial" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="AlphaFold Beginner&#39;s Guide" class="md-nav__button md-logo" aria-label="AlphaFold Beginner's Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    AlphaFold Beginner's Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/skku-yoolab/alphafold-tutorial" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    준비물
+  </a>
+  
+    <nav class="md-nav" aria-label="준비물">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    기계 준비하기
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker_engine" class="md-nav__link">
+    Docker Engine
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    Docker는 무엇인가
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_engine_1" class="md-nav__link">
+    Docker Engine 설치하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root_docker" class="md-nav__link">
+    Root 권한 없이 Docker 사용하기
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvidia_contatiner_toolkit" class="md-nav__link">
+    NVIDIA Contatiner Toolkit
+  </a>
+  
+    <nav class="md-nav" aria-label="NVIDIA Contatiner Toolkit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuda_driver" class="md-nav__link">
+    CUDA driver 설치하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nvidia_container_toolkit" class="md-nav__link">
+    NVIDIA Container Toolkit 설치하기
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alphafold_1" class="md-nav__link">
+    AlphaFold 설치하기
+  </a>
+  
+    <nav class="md-nav" aria-label="AlphaFold 설치하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alphafold_git" class="md-nav__link">
+    AlphaFold Git 저장소 받아오기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database_parameter" class="md-nav__link">
+    Database와 parameter 받아오기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_dependency" class="md-nav__link">
+    Python dependency 설치하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    입력 준비하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    결과 분석
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    준비물
+  </a>
+  
+    <nav class="md-nav" aria-label="준비물">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    기계 준비하기
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker_engine" class="md-nav__link">
+    Docker Engine
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    Docker는 무엇인가
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker_engine_1" class="md-nav__link">
+    Docker Engine 설치하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root_docker" class="md-nav__link">
+    Root 권한 없이 Docker 사용하기
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvidia_contatiner_toolkit" class="md-nav__link">
+    NVIDIA Contatiner Toolkit
+  </a>
+  
+    <nav class="md-nav" aria-label="NVIDIA Contatiner Toolkit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuda_driver" class="md-nav__link">
+    CUDA driver 설치하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nvidia_container_toolkit" class="md-nav__link">
+    NVIDIA Container Toolkit 설치하기
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alphafold_1" class="md-nav__link">
+    AlphaFold 설치하기
+  </a>
+  
+    <nav class="md-nav" aria-label="AlphaFold 설치하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alphafold_git" class="md-nav__link">
+    AlphaFold Git 저장소 받아오기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database_parameter" class="md-nav__link">
+    Database와 parameter 받아오기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python_dependency" class="md-nav__link">
+    Python dependency 설치하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    입력 준비하기
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    결과 분석
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="alphafold">AlphaFold 쌩초보 가이드(?)<a class="headerlink" href="#alphafold" title="Permanent link">#</a></h1>
+<h2 id="_1">준비물<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
+<h3 id="_2">기계 준비하기<a class="headerlink" href="#_2" title="Permanent link">#</a></h3>
+<ol>
+<li>Linux가 설치된 AMD64 CPU가 설치된 computer.<ul>
+<li>Intel Core seriers, Xeon series, ...</li>
+<li>AMD Ryzen, EPYC, ...</li>
+</ul>
+</li>
+<li>NVIDIA GPU가 필요함.<ul>
+<li>High-end gaming GPUs: RTX 3090, RTX 4090</li>
+<li>Data center GPUs: V100, A100, ...</li>
+</ul>
+</li>
+<li>Git과 Python 3이 설치되어 있어야 함.</li>
+</ol>
+<h2 id="docker_engine">Docker Engine<a class="headerlink" href="#docker_engine" title="Permanent link">#</a></h2>
+<h3 id="docker">Docker는 무엇인가<a class="headerlink" href="#docker" title="Permanent link">#</a></h3>
+<ul>
+<li>Docker는 환경을 분리하여 리소스를 관리하고 의존성 문제를 해결하는 solution임.</li>
+<li>Software engineering에서 절찬리 사용중 (2023년 기준)</li>
+<li><a href="https://docs.docker.com/engine/install/">이곳</a>에 Linux 배포판 별로 설치 방법이 상세하게 작성되어 있음.</li>
+<li>Google이 매우 잘 활용하고 있으므로 AlphaFold도 Docker 기반으로 배포되고 있음.</li>
+</ul>
+<h3 id="docker_engine_1">Docker Engine 설치하기<a class="headerlink" href="#docker_engine_1" title="Permanent link">#</a></h3>
+<ul>
+<li>OS는 Linux만 가능함.</li>
+<li>배포판은 Ubuntu, REHL 같은 유명한 것은 가능함.</li>
+<li>Superuser 권한이 필요함.</li>
+<li>Ubuntu 22.04 LTS기준으로 설명함.</li>
+</ul>
+<p>Apt는 Ubuntu와 같은 Debian 계통 배포판에서 사용되는 (Apple의 앱스토어 같은) 패키지 관리자임.
+다음은 APT에 Docker의 저장소를 등록하는 과정임.</p>
+<pre><code class="language-bash"># Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  &quot;deb [arch=&quot;$(dpkg --print-architecture)&quot; signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  &quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot; stable&quot; | \
+  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+sudo apt-get update
+</code></pre>
+<p>Docker Engine을 받아와서 설치함.</p>
+<pre><code class="language-bash">sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</code></pre>
+<p>다음을 실행했을 때 아래와 같이 출력되면 성공!</p>
+<pre><code class="language-bash">sudo docker run hello-world
+</code></pre>
+<p><img alt="Hello World" src="image-0.png" /></p>
+<h3 id="root_docker">Root 권한 없이 Docker 사용하기<a class="headerlink" href="#root_docker" title="Permanent link">#</a></h3>
+<ul>
+<li>Docker는 기본적으로 실행에 root 권한이 필요함.</li>
+<li>특정 사용자에게 Docker의 사용 권한을 부여할 수 있음.</li>
+</ul>
+<p><code>$USER</code>를 권한을 부여할 사용자의 이름으로 변경하여 다음을 실행하면 사용자가 등록됨.</p>
+<pre><code class="language-bash">sudo groupadd docker
+sudo usermod -aG docker $USER
+</code></pre>
+<h2 id="nvidia_contatiner_toolkit">NVIDIA Contatiner Toolkit<a class="headerlink" href="#nvidia_contatiner_toolkit" title="Permanent link">#</a></h2>
+<ul>
+<li>Docker container 내부에서 GPU를 사용하기 위해서 필요한 toolkit임.</li>
+<li>System에 반드시 CUDA driver가 설치되어 있어야 작동함.</li>
+</ul>
+<h3 id="cuda_driver">CUDA driver 설치하기<a class="headerlink" href="#cuda_driver" title="Permanent link">#</a></h3>
+<p><a href="https://developer.nvidia.com/cuda-downloads">이곳</a>을 참조하여 driver를 설치하면 됨. (생략)</p>
+<h3 id="nvidia_container_toolkit">NVIDIA Container Toolkit 설치하기<a class="headerlink" href="#nvidia_container_toolkit" title="Permanent link">#</a></h3>
+<p><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">이곳</a> 다른 배포판에 관하여 설명되어 있음.</p>
+<p>Apt에 저장소 등록하기.</p>
+<pre><code class="language-bash">curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list \
+  &amp;&amp; \
+    sudo apt-get update
+</code></pre>
+<p>Apt로 패키지 설치하기.</p>
+<pre><code class="language-bash">sudo apt-get install -y nvidia-container-toolkit
+</code></pre>
+<p>다음을 실행해서 Docker에서 CUDA를 사용할 수 있도록 설정함.</p>
+<pre><code class="language-bash">sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+
+sudo nvidia-ctk runtime configure --runtime=containerd
+sudo systemctl restart containerd
+
+sudo nvidia-ctk runtime configure --runtime=crio
+sudo systemctl restart crio
+</code></pre>
+<p>다음을 실행했을 때 장착된 장비의 정보가 출력되면 성공한 것임.</p>
+<pre><code class="language-bash">sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+</code></pre>
+<p><img alt="nvidia-smi" src="image-1.png" /></p>
+<h2 id="alphafold_1">AlphaFold 설치하기<a class="headerlink" href="#alphafold_1" title="Permanent link">#</a></h2>
+<h3 id="alphafold_git">AlphaFold Git 저장소 받아오기<a class="headerlink" href="#alphafold_git" title="Permanent link">#</a></h3>
+<pre><code class="language-bash">git clone https://github.com/deepmind/alphafold.git
+cd ./alphafold
+</code></pre>
+<h3 id="database_parameter">Database와 parameter 받아오기<a class="headerlink" href="#database_parameter" title="Permanent link">#</a></h3>
+<ul>
+<li>Database를 받아오려면 <code>aria2c</code>가 필요함. (<code>sudo alt install aria2</code>로 설치함.)</li>
+<li>모든 database를 download하면 대략 2.62 TB의 공간이 필요함.</li>
+<li><code>$DOWNLOAD_DIR</code>를 file을 저장할 directory로 변경하고 다음을 실행함.</li>
+<li>인내심과 큰 공간이 필요함. (하루는 잡고 기다려야함.)</li>
+<li>Download 중에 연결이 끊어진 경우 <code>scripts/</code> directory에 있는 개별 항목을 받아오는 script를 실행하면 이어받기가 됨.</li>
+</ul>
+<pre><code class="language-bash">scripts/download_all_data.sh $DOWNLOAD_DIR
+</code></pre>
+<ul>
+<li>모두 받으면 다음과 같음.</li>
+</ul>
+<p>```plain text
+$DOWNLOAD_DIR/                             # Total: ~ 2.62 TB (download: 556 GB)
+    bfd/                                   # ~ 1.8 TB (download: 271.6 GB)
+        # 6 files.
+    mgnify/                                # ~ 120 GB (download: 67 GB)
+        mgy_clusters_2022_05.fa
+    params/                                # ~ 5.3 GB (download: 5.3 GB)
+        # 5 CASP14 models,
+        # 5 pTM models,
+        # 5 AlphaFold-Multimer models,
+        # LICENSE,
+        # = 16 files.
+    pdb70/                                 # ~ 56 GB (download: 19.5 GB)
+        # 9 files.
+    pdb_mmcif/                             # ~ 238 GB (download: 43 GB)
+        mmcif_files/
+            # About 199,000 .cif files.
+        obsolete.dat
+    pdb_seqres/                            # ~ 0.2 GB (download: 0.2 GB)
+        pdb_seqres.txt
+    small_bfd/                             # ~ 17 GB (download: 9.6 GB)
+        bfd-first_non_consensus_sequences.fasta
+    uniref30/                              # ~ 206 GB (download: 52.5 GB)
+        # 7 files.
+    uniprot/                               # ~ 105 GB (download: 53 GB)
+        uniprot.fasta
+    uniref90/                              # ~ 67 GB (download: 34 GB)
+        uniref90.fasta</p>
+<pre><code>
+### Docker image 생성하기
+
+- 다음 명령으로 AlphaFold docker image를 생성함.
+- 꽤 오래 걸리는 작업임 (10-20분 정도 소요).
+
+```bash
+docker build -f docker/Dockerfile -t alphafold .
+</code></pre>
+<ul>
+<li>(2023-10-22) Ada Lovelace (RTX 4000 series)를 사용하려면 <code>docker/Dockerfile</code>을 수정해야함.</li>
+</ul>
+<pre><code class="language-diff">--- a/docker/Dockerfile
++++ b/docker/Dockerfile
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+-ARG CUDA=11.1.1
+-FROM nvidia/cuda:${CUDA}-cudnn8-runtime-ubuntu18.04
++ARG CUDA=11.8.0
++FROM nvidia/cuda:${CUDA}-cudnn8-devel-ubuntu18.04
+ # FROM directive resets ARGS, so we specify again (the value is retained if
+ # previously set).
+@@ -53,13 +53,13 @@ RUN wget -q -P /tmp \
+
+ # Install conda packages.
+ ENV PATH=&quot;/opt/conda/bin:$PATH&quot;
+-RUN conda install -qy conda==4.13.0 \
+-    &amp;&amp; conda install -y -c conda-forge \
+-      openmm=7.5.1 \
+-      cudatoolkit==${CUDA_VERSION} \
++# RUN conda install -qy conda==23.7.2 \
++RUN conda install -y -c conda-forge \
++      openmm=7.7.0 \
++      cudatoolkit=${CUDA_VERSION} \
+       pdbfixer \
+       pip \
+-      python=3.8 \
++      python=3.9 \
+       &amp;&amp; conda clean --all --force-pkgs-dirs --yes
+
+ COPY . /app/alphafold
+@@ -70,13 +70,13 @@ RUN wget -q -P /app/alphafold/alphafold/common/ \
+ RUN pip3 install --upgrade pip --no-cache-dir \
+     &amp;&amp; pip3 install -r /app/alphafold/requirements.txt --no-cache-dir \
+     &amp;&amp; pip3 install --upgrade --no-cache-dir \
+-      jax==0.3.25 \
+-      jaxlib==0.3.25+cuda11.cudnn805 \
++      jax==0.4.13 \
++      jaxlib==0.4.13+cuda11.cudnn86 \
+       -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
+ # Apply OpenMM patch.
+-WORKDIR /opt/conda/lib/python3.8/site-packages
+-RUN patch -p0 &lt; /app/alphafold/docker/openmm.patch
++# WORKDIR /opt/conda/lib/python3.9/site-packages
++# RUN patch -p1 &lt; /app/alphafold/docker/openmm.patch
+
+ # Add SETUID bit to the ldconfig binary so that non-root users can run it.
+ RUN chmod u+s /sbin/ldconfig.real
+</code></pre>
+<ul>
+<li>다음과 같은 출력이 나오면 인내심을 갖고 기다려봅시다.</li>
+</ul>
+<p><img alt="Docker image build" src="image-2.png" /></p>
+<h3 id="python_dependency">Python dependency 설치하기<a class="headerlink" href="#python_dependency" title="Permanent link">#</a></h3>
+<ul>
+<li>이왕이면 Python virtual environemnt이나 Conda와 같은 방법으로 의존성 관리를 하는 것이 권장됨.</li>
+<li>다음 명령을 실행하여 필요한 Python 패키지를 설치한다.</li>
+</ul>
+<pre><code class="language-bash">pip3 install -r docker/requirements.txt
+</code></pre>
+<ul>
+<li>(2023-10-22) 다음을 실행하여 기본으로 설치되는 패키지의 버전을 변경해야함.</li>
+</ul>
+<pre><code class="language-bash">pip3 uninstall &quot;requests&quot;
+pip3 install &quot;requests==2.28.1&quot;
+</code></pre>
+<h3 id="_3">입력 준비하기<a class="headerlink" href="#_3" title="Permanent link">#</a></h3>
+<ul>
+<li>단백질의 서열은 FASTA format으로 입력받음.</li>
+</ul>
+<p>```plain text</p>
+<blockquote>
+<p>Protein-G
+YKLILNGKTLKGETTTEAVDAATAEKVFKQYANDNGVDGEWTYDDATKTFTVTE</p>
+</blockquote>
+<pre><code>
+### 실행하기
+
+- Clone된 AlahaFold repository가 저장된 directory에서 다음을 실행함.
+- `$FASTA_PATH`에는 예측한 서열을 담은 FASTA 형식의 입력 file의 경로를 넣음.
+- `$OUTPUT_DIR`에는 예측 결과를 저장할 directroy의 경로를 넣음.
+- `$DOWNLOAD_DIR`에는 위에서 download한 database의 경로를 넣음.
+
+```bash
+python3 &quot;docker/run_docker.py&quot; \
+  --fasta_paths=&quot;$FASTA_PATH&quot; \
+  --max_template_date=&quot;2022-01-01&quot; \
+  --model_preset=&quot;monomer&quot; \
+  --db_preset=full_dbs \
+  --data_dir=&quot;$DOWNLOAD_DIR&quot; \
+  --output_dir=&quot;OUTPUT_DIR&quot;
+</code></pre>
+<h3 id="_4">결과 분석<a class="headerlink" href="#_4" title="Permanent link">#</a></h3>
+<ul>
+<li>예측된 model은 PDB 또는 mmCIF 형식으로 출력됨.</li>
+<li>PyMOL, VMD, Chiemera 등으로 시각화 가능함.</li>
+<li>AlphaFold는 자체적인 정확도 예측 점수를 출력함.</li>
+</ul>
+<p>```plain text</p>
+<h1 id="database_query_result">Database query result<a class="headerlink" href="#database_query_result" title="Permanent link">#</a></h1>
+<p>msas/</p>
+<h1 id="self-confidence_predictions">Self-confidence predictions<a class="headerlink" href="#self-confidence_predictions" title="Permanent link">#</a></h1>
+<p>confidence_model_1_pred_0.json
+confidence_model_2_pred_0.json
+confidence_model_3_pred_0.json
+confidence_model_4_pred_0.json
+confidence_model_5_pred_0.json</p>
+<h1 id="input_features">Input features<a class="headerlink" href="#input_features" title="Permanent link">#</a></h1>
+<p>features.pkl</p>
+<h1 id="output_structure_sorted_by_predicted_condidence_scores">Output structure sorted by predicted condidence scores<a class="headerlink" href="#output_structure_sorted_by_predicted_condidence_scores" title="Permanent link">#</a></h1>
+<p>ranked_0.cif
+ranked_0.pdb
+ranked_1.cif
+ranked_1.pdb
+ranked_2.cif
+ranked_2.pdb
+ranked_3.cif
+ranked_3.pdb
+ranked_4.cif
+ranked_4.pdb</p>
+<h1 id="ranking_details">Ranking details<a class="headerlink" href="#ranking_details" title="Permanent link">#</a></h1>
+<p>ranking_debug.json</p>
+<h1 id="physically_relaxed_models">Physically relaxed models<a class="headerlink" href="#physically_relaxed_models" title="Permanent link">#</a></h1>
+<p>relaxed_model_2_pred_0.cif
+relaxed_model_2_pred_0.pdb
+relaxed_model_5_pred_0.cif
+relaxed_model_5_pred_0.pdb
+relax_metrics.json</p>
+<h1 id="detailed_outputs">Detailed outputs<a class="headerlink" href="#detailed_outputs" title="Permanent link">#</a></h1>
+<p>result_model_1_pred_0.pkl
+result_model_2_pred_0.pkl
+result_model_3_pred_0.pkl
+result_model_4_pred_0.pkl
+result_model_5_pred_0.pkl</p>
+<h1 id="unrelaxed_models">Unrelaxed models<a class="headerlink" href="#unrelaxed_models" title="Permanent link">#</a></h1>
+<p>unrelaxed_model_1_pred_0.cif
+unrelaxed_model_1_pred_0.pdb
+unrelaxed_model_2_pred_0.cif
+unrelaxed_model_2_pred_0.pdb
+unrelaxed_model_3_pred_0.cif
+unrelaxed_model_3_pred_0.pdb
+unrelaxed_model_4_pred_0.cif
+unrelaxed_model_4_pred_0.pdb
+unrelaxed_model_5_pred_0.cif
+unrelaxed_model_5_pred_0.pdb
+```</p>
+<!-- 
+```bash
+python3 "docker/run_docker.py" \
+  --fasta_paths="/home/vv137/tmp/af/prot.fasta" \
+  --max_template_date="2022-01-01" \
+  --model_preset=monomer \
+  --db_preset=full_dbs \
+  --data_dir="/apps/vv137/alphafold.data.1" \
+  --output_dir="/home/vv137/tmp/af" 
+``` -->
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 Minsoo Kim
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
