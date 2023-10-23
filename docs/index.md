@@ -147,7 +147,7 @@ scripts/download_all_data.sh $DOWNLOAD_DIR
 
 - 모두 받으면 다음과 같음.
 
-```plain text
+```plain
 $DOWNLOAD_DIR/                             # Total: ~ 2.62 TB (download: 556 GB)
     bfd/                                   # ~ 1.8 TB (download: 271.6 GB)
         # 6 files.
@@ -182,7 +182,7 @@ $DOWNLOAD_DIR/                             # Total: ~ 2.62 TB (download: 556 GB)
 - 다음 명령으로 AlphaFold docker image를 생성함.
 - 꽤 오래 걸리는 작업임 (10-20분 정도 소요).
 
-```bash
+```plain
 docker build -f docker/Dockerfile -t alphafold .
 ```
 
@@ -264,7 +264,7 @@ pip3 install "requests==2.28.1"
 
 - 단백질의 서열은 FASTA format으로 입력받음.
 
-```plain
+```fasta
 >Protein-G
 YKLILNGKTLKGETTTEAVDAATAEKVFKQYANDNGVDGEWTYDDATKTFTVTE
 ```
