@@ -399,6 +399,40 @@
     결과 분석하기
   </a>
   
+    <nav class="md-nav" aria-label="결과 분석하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#af-pipeline" class="md-nav__link">
+    AF-Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plddt" class="md-nav__link">
+    pLDDT
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colabfold" class="md-nav__link">
+    ColabFold
+  </a>
+  
 </li>
       
     </ul>
@@ -561,6 +595,40 @@
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     결과 분석하기
+  </a>
+  
+    <nav class="md-nav" aria-label="결과 분석하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#af-pipeline" class="md-nav__link">
+    AF-Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plddt" class="md-nav__link">
+    pLDDT
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colabfold" class="md-nav__link">
+    ColabFold
   </a>
   
 </li>
@@ -844,6 +912,16 @@
 </span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span>--output_dir<span class="o">=</span><span class="s2">&quot;OUTPUT_DIR&quot;</span>
 </span></code></pre></div>
 <h2 id="_7">결과 분석하기<a class="headerlink" href="#_7" title="Permanent link">#</a></h2>
+<h3 id="af-pipeline">AF-Pipeline<a class="headerlink" href="#af-pipeline" title="Permanent link">#</a></h3>
+<ol>
+<li>전처리 (Database search)</li>
+<li>추론 (Recycling)</li>
+<li>Energy 최적화 (with Amber ff99SB)</li>
+</ol>
+<p><img alt="MSAs" src="image-9.png" /></p>
+<p><img alt="Result" src="image-8.png" /></p>
+<p><img alt="Relax" src="image-7.png" /></p>
+<h3 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">#</a></h3>
 <ul>
 <li>예측된 model은 PDB 또는 mmCIF 형식으로 출력됨.</li>
 <li>PyMOL, VMD, Chiemera 등으로 시각화 가능함.</li>
@@ -897,6 +975,12 @@
 </span><span id="__span-18-46"><a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a>unrelaxed_model_5_pred_0.pdb
 </span></code></pre></div>
 <p><img alt="PyMOL" src="image-3.png" /></p>
+<h3 id="plddt">pLDDT<a class="headerlink" href="#plddt" title="Permanent link">#</a></h3>
+<p>Temperature factor column에 pLDDT가 들어감.</p>
+<p><img alt="PDB" src="image-10.png" /></p>
+<p>이는 각각의 residue의 구조가 얼마나 정확한지 0과 100 사이의 값으로 예측하는 것이다.</p>
+<p><img alt="pLDDT" src="image-11.png" /></p>
+<p>Superposition of Triosephosphate isomerase (<code>P60174</code> : <code>TPIS_HUMAN</code>) prediction and PDB <code>**7RDE**</code></p>
 <!-- 
 ```bash
 python3 "docker/run_docker.py" \
@@ -907,6 +991,12 @@ python3 "docker/run_docker.py" \
   --data_dir="/apps/vv137/alphafold.data.1" \
   --output_dir="/home/vv137/tmp/af" 
 ``` -->
+
+<h2 id="colabfold">ColabFold<a class="headerlink" href="#colabfold" title="Permanent link">#</a></h2>
+<p>만약 GPU가 없거나 상황이 좋지 못하면 경량화(?)판인 ColabFold를 사용해볼 수 있다.
+<a href="https://github.com/sokrypton/ColabFold">ColabFold</a>의 repository에 들어가면 Google Colab으로 연결되는 link가 있다.</p>
+<p><img alt="ColabFold" src="image-5.png" /></p>
+<p><img alt="ColabFold-AF" src="image-6.png" /></p>
 
 
 
