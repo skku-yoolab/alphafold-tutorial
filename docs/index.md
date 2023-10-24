@@ -12,6 +12,14 @@
     - Data center GPUs: V100, A100, ...
 1. Git과 Python 3이 설치되어 있어야 함.
 
+### 발표자의 기계
+
+- AMD Ryzen 9 7950X
+- ASUS ProArt X670E-CREATOR WIFI
+- SK하이닉스 DDR5-5600
+- GIGABYTE Geforce RTX 4090 Gaming OC D6X 24GB
+- SK하이닉스 Platinum P41 M.2 NVMe (500GB)
+
 ## Docker Engine
 
 ### Docker는 무엇인가
