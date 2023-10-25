@@ -1,5 +1,7 @@
 # AlphaFold 쌩초보 가이드(?)
 
+![AlphaFold](image-4.png)
+
 ## 준비물
 
 ### 기계 준비하기
@@ -85,14 +87,8 @@ sudo usermod -aG docker $USER
 
 - Docker container 내부에서 GPU를 사용하기 위해서 필요한 toolkit임.
 - System에 반드시 CUDA driver가 설치되어 있어야 작동함.
-
-### CUDA driver
-
-[이곳](https://developer.nvidia.com/cuda-downloads)을 참조하여 driver를 설치하면 됨. (생략)
-
-### 설치하기
-
-[이곳](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) 다른 배포판에 관하여 설명되어 있음.
+- [이곳](https://developer.nvidia.com/cuda-downloads)을 참조하여 driver를 설치하면 됨. (생략)
+- [이곳](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) 다른 배포판에 관하여 설명되어 있음.
 
 Apt에 저장소 등록하기.
 
@@ -268,7 +264,7 @@ pip3 uninstall "requests"
 pip3 install "requests==2.28.1"
 ```
 
-### 입력 준비하기
+## 입력 준비하기
 
 - 단백질의 서열은 FASTA format으로 입력받음.
 
@@ -277,7 +273,7 @@ pip3 install "requests==2.28.1"
 YKLILNGKTLKGETTTEAVDAATAEKVFKQYANDNGVDGEWTYDDATKTFTVTE
 ```
 
-### 실행하기
+## 실행하기
 
 - Clone된 AlahaFold repository가 저장된 directory에서 다음을 실행함.
 - `$FASTA_PATH`에는 예측한 서열을 담은 FASTA 형식의 입력 file의 경로를 넣음.
@@ -306,7 +302,23 @@ python3 "docker/run_docker.py" \
   --output_dir="OUTPUT_DIR"
 ```
 
-### 결과 분석
+## 결과 분석하기
+
+### AF-Pipeline
+
+AlphaFold는 다음과 같은 과정으로 이루어짐.
+
+1. 전처리 (Database search)
+1. 추론 (Recycling)
+1. Energy 최적화 (with Amber ff99SB)
+
+![MSAs](image-9.png)
+
+![Result](image-8.png)
+
+![Relax](image-7.png)
+
+### Outputs
 
 - 예측된 model은 PDB 또는 mmCIF 형식으로 출력됨.
 - PyMOL, VMD, Chiemera 등으로 시각화 가능함.
@@ -363,6 +375,24 @@ unrelaxed_model_5_pred_0.pdb
 
 ![PyMOL](image-3.png)
 
+### pLDDT
+
+Temperature factor column에 pLDDT가 들어감.
+
+![PDB](image-10.png)
+
+- 이는 각각의 residue의 구조가 얼마나 정확한지 0과 100 사이의 값으로 예측함.
+- DeepMind에서는 다음과 같은 기준을 제시함.
+  - Very high : pLDDT > 90
+  - Confident : 90 > pLDDT > 70
+  - Low : 70 > pLDDT > 50
+  - Very low : pLDDT < 50
+- PyMOL에서는 `spectrum b, rainbow_rev, all, 0, 100`로 시각화 할 수 있음.
+
+![pLDDT](image-11.png)
+
+Superposition of Triosephosphate isomerase (`P60174` : `TPIS_HUMAN`) prediction and PDB `**7RDE**`
+
 <!-- 
 ```bash
 python3 "docker/run_docker.py" \
@@ -373,3 +403,12 @@ python3 "docker/run_docker.py" \
   --data_dir="/apps/vv137/alphafold.data.1" \
   --output_dir="/home/vv137/tmp/af" 
 ``` -->
+
+## ColabFold
+
+만약 GPU가 없거나 상황이 좋지 못하면 경량화(?)판인 ColabFold를 사용해볼 수 있다.
+[ColabFold](https://github.com/sokrypton/ColabFold)의 repository에 들어가면 Google Colab으로 연결되는 link가 있다.
+
+![ColabFold](image-5.png)
+
+![ColabFold-AF](image-6.png)
