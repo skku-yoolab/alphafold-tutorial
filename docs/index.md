@@ -268,7 +268,7 @@ pip3 install "requests==2.28.1"
 
 - 단백질의 서열은 FASTA format으로 입력받음.
 
-```fasta
+```fasta title="input.fasta"
 >Protein-G
 YKLILNGKTLKGETTTEAVDAATAEKVFKQYANDNGVDGEWTYDDATKTFTVTE
 ```
@@ -314,9 +314,15 @@ AlphaFold는 다음과 같은 과정으로 이루어짐.
 
 ![MSAs](image-9.png)
 
+MSA search results.
+
 ![Result](image-8.png)
 
+An unrelaxed prediction.
+
 ![Relax](image-7.png)
+
+After relaxation.
 
 ### Outputs
 
