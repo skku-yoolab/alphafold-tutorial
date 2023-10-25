@@ -913,6 +913,7 @@
 </span></code></pre></div>
 <h2 id="_7">결과 분석하기<a class="headerlink" href="#_7" title="Permanent link">#</a></h2>
 <h3 id="af-pipeline">AF-Pipeline<a class="headerlink" href="#af-pipeline" title="Permanent link">#</a></h3>
+<p>AlphaFold는 다음과 같은 과정으로 이루어짐.</p>
 <ol>
 <li>전처리 (Database search)</li>
 <li>추론 (Recycling)</li>
@@ -978,7 +979,15 @@
 <h3 id="plddt">pLDDT<a class="headerlink" href="#plddt" title="Permanent link">#</a></h3>
 <p>Temperature factor column에 pLDDT가 들어감.</p>
 <p><img alt="PDB" src="image-10.png" /></p>
-<p>이는 각각의 residue의 구조가 얼마나 정확한지 0과 100 사이의 값으로 예측하는 것이다.</p>
+<ul>
+<li>이는 각각의 residue의 구조가 얼마나 정확한지 0과 100 사이의 값으로 예측함.</li>
+<li>DeepMind에서는 다음과 같은 기준을 제시함.</li>
+<li>Very high : pLDDT &gt; 90</li>
+<li>Confident : 90 &gt; pLDDT &gt; 70</li>
+<li>Low : 70 &gt; pLDDT &gt; 50</li>
+<li>Very low : pLDDT &lt; 50</li>
+<li>PyMOL에서는 <code>spectrum b, rainbow_rev, all, 0, 100</code>로 시각화 할 수 있음.</li>
+</ul>
 <p><img alt="pLDDT" src="image-11.png" /></p>
 <p>Superposition of Triosephosphate isomerase (<code>P60174</code> : <code>TPIS_HUMAN</code>) prediction and PDB <code>**7RDE**</code></p>
 <!-- 
