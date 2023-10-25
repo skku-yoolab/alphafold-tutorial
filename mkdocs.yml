@@ -6,7 +6,8 @@ repo_url: "https://github.com/skku-yoolab/alphafold-tutorial"
 remote_branch: "gh-pages"
 
 nav:
-  - Home: index.md
+  - AlphaFold: index.md
+  - MegaFold: megafold.md
 
 theme:
   features:
