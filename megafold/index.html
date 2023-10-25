@@ -10,22 +10,26 @@
         <meta name="author" content="Minsoo Kim">
       
       
+        <link rel="canonical" href="https://skku-yoolab.github.io/alphafold-tutorial/megafold/">
+      
+      
+        <link rel="prev" href="..">
       
       
       
-      <link rel="icon" href="/alphafold-tutorial/assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
     
     
       
-        <title>AlphaFold Beginner's Guide</title>
+        <title>MegaFold - AlphaFold Beginner's Guide</title>
       
     
     
-      <link rel="stylesheet" href="/alphafold-tutorial/assets/stylesheets/main.35e1ed30.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.35e1ed30.min.css">
       
         
-        <link rel="stylesheet" href="/alphafold-tutorial/assets/stylesheets/palette.356b1318.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
       
       
 
@@ -44,11 +48,11 @@
       
     
     
-      <link rel="stylesheet" href="/alphafold-tutorial/assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="/alphafold-tutorial/stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/alphafold-tutorial/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,6 +76,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#megafold" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -84,7 +93,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/alphafold-tutorial/." title="AlphaFold Beginner&#39;s Guide" class="md-header__button md-logo" aria-label="AlphaFold Beginner's Guide" data-md-component="logo">
+    <a href=".." title="AlphaFold Beginner&#39;s Guide" class="md-header__button md-logo" aria-label="AlphaFold Beginner's Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -104,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              MegaFold
             
           </span>
         </div>
@@ -190,7 +199,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/alphafold-tutorial/." title="AlphaFold Beginner&#39;s Guide" class="md-nav__button md-logo" aria-label="AlphaFold Beginner's Guide" data-md-component="logo">
+    <a href=".." title="AlphaFold Beginner&#39;s Guide" class="md-nav__button md-logo" aria-label="AlphaFold Beginner's Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -219,7 +228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/alphafold-tutorial/." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -236,9 +245,18 @@
       
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/alphafold-tutorial/megafold/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -247,6 +265,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -268,6 +287,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -279,8 +300,28 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+  
+  
+
+
+<h1 id="megafold">MegaFold<a class="headerlink" href="#megafold" title="Permanent link">#</a></h1>
+<ul>
+<li>AlphaFold2는 분명히 유용한 도구이다.</li>
+<li>그러나 너무 많은 memory를 요구한다.</li>
+<li>Monomer의 경우 gaming 제품군으로 충분함.</li>
+<li>Multimer 추론의 경우 residue의 개수가 굉장히 많음.</li>
+<li>DeepMind의 원본 구현은 NVIDIA A100 80GB에서도 2048개 이상의 residue를 처리하지 못함.</li>
+<li>백지장도 맞들면 낫다.</li>
+<li>분산처리를 구현한다.</li>
+</ul>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -317,12 +358,12 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/alphafold-tutorial/", "features": ["content.code.copy", "content.code.annotate"], "search": "/alphafold-tutorial/assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/alphafold-tutorial/assets/javascripts/bundle.aecac24b.min.js"></script>
+      <script src="../assets/javascripts/bundle.aecac24b.min.js"></script>
       
-        <script src="/alphafold-tutorial/javascripts/mathjax.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
